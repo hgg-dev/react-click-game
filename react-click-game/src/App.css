@@ -1,0 +1,16 @@
+.parentcard {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  background-color: silver;
+  height: 100vh;
+}
+h1 {
+  width: 100%;
+  text-align: center;
+}
+h2 {
+  width: 100%;
+  text-align: center;
+}
