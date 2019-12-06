@@ -1,14 +1,12 @@
 // Fix recorder
 // Check click again than reset game
+//why can't pass to header this.props.countSoFar
 
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Card from "./components/card";
 import Header from "./components/layout/header";
-
-var count = 0;
-var cal = count % 2;
 
 class App extends React.Component {
   state = {
@@ -43,7 +41,9 @@ class App extends React.Component {
         src: "./img/6.PNG",
         click: false
       }
-    ]
+    ],
+    countState: 0,
+    highestCount: 0
   };
 
   // randomOrder = el => {
@@ -54,27 +54,58 @@ class App extends React.Component {
   //   };
   // };
 
-  clicked = data => {
-    console.log("props" + this.props);
-    count++;
+  updateClick(data, index) {
+    this.state.countState += 1;
+
     this.setState({
-      box: this.state.box.map(check => {
-        if (check.id === data) {
-          // Change click to not the same value
-          check.click = !check.click;
-          this.randomOrder();
-        }
-        return check;
-      })
+      box: (this.state.box[index].click = true)
     });
+    var updatedBox = box.map((element, indx) => {
+      return { ...element, click: indx == index ? true : false };
+    });
+
+    this.setState({ box: boxUpdate });
+    console.log("id: " + data.id + " key: " + index);
+    console.log("click update to" + this.state.box[index].click);
+  }
+
+  clicked = data => {
+    var alertFun = data => {
+      alert("clicked already");
+
+      // if (this.state.highestCount < this.state.countState) {
+      //   console.log("the count is " + this.state.count);
+      //   this.setState({ highestCount: this.state.countState });
+      //   this.state.count = 0;
+      //   console.log("highest count is " + this.state.highestCount);
+      // }
+    };
+
+    this.state.box.forEach((element, index) => {
+      if (element.id === data.id) {
+        element.click ? alertFun() : updateClick(element, index);
+      }
+      // return element;
+    });
+
+    // this.setState({
+    //   countState: this.state.countState + 1,
+    //   box: this.state.box.map(element => {
+    //     if (element.id === data.id) {
+    //       element.click ? alert("clicked already") : (element.click = true);
+    //     }
+    //     return element;
+    //   })
+    // });
   };
 
   render() {
     return (
       <>
-        <Header />
+        <Header countSoFar={this.state.countState} />
         <div className="parentcard">
-          <h2>Count: {count}</h2>
+          <h2>Current Count: {this.state.countState}</h2>
+          <h2>Highest Count: </h2>
           <Card container={this.state.box} clicked={this.clicked} />
         </div>
       </>
