@@ -1,5 +1,5 @@
 // Fix recorder
-// Check click again than reset game
+// Line 61, 62 need fix
 //why can't pass to header this.props.countSoFar
 
 import React from "react";
@@ -12,32 +12,32 @@ class App extends React.Component {
   state = {
     box: [
       {
-        id: 1,
+        id: 0,
         src: "./img/1.PNG",
         click: false
       },
       {
-        id: 2,
+        id: 1,
         src: "./img/2.PNG",
         click: false
       },
       {
-        id: 3,
+        id: 2,
         src: "./img/3.PNG",
         click: false
       },
       {
-        id: 4,
+        id: 3,
         src: "./img/4.PNG",
         click: true
       },
       {
-        id: 5,
+        id: 4,
         src: "./img/5.PNG",
         click: false
       },
       {
-        id: 6,
+        id: 5,
         src: "./img/6.PNG",
         click: false
       }
@@ -54,36 +54,42 @@ class App extends React.Component {
   //   };
   // };
 
-  updateClick(data, index) {
-    this.state.countState += 1;
+  updateClick(data) {
+    var idUpdate = data.id;
+    console.log(idUpdate);
+
+    const newBox = (this.state.box[idUpdate].click = true);
 
     this.setState({
-      box: (this.state.box[index].click = true)
-    });
-    var updatedBox = box.map((element, indx) => {
-      return { ...element, click: indx == index ? true : false };
+      countState: ++this.state.countState,
+      box: newBox
     });
 
-    this.setState({ box: boxUpdate });
-    console.log("id: " + data.id + " key: " + index);
-    console.log("click update to" + this.state.box[index].click);
+    // var updatedBox = box.map((element, indx) => {
+    //   return { ...element, click: indx == index ? true : false };
+    // });
+
+    // this.setState({ box: boxUpdate });
+    // console.log("id: " + data.id + " key: " + index);
+    // console.log("click update to" + this.state.box[index].click);
   }
 
+  alertFun = data => {
+    alert("clicked already");
+
+    // if (this.state.highestCount < this.state.countState) {
+    //   console.log("the count is " + this.state.count);
+    //   this.setState({ highestCount: this.state.countState });
+    //   this.state.count = 0;
+    //   console.log("highest count is " + this.state.highestCount);
+    // }
+  };
+
+  //Trigger by click on card
   clicked = data => {
-    var alertFun = data => {
-      alert("clicked already");
-
-      // if (this.state.highestCount < this.state.countState) {
-      //   console.log("the count is " + this.state.count);
-      //   this.setState({ highestCount: this.state.countState });
-      //   this.state.count = 0;
-      //   console.log("highest count is " + this.state.highestCount);
-      // }
-    };
-
-    this.state.box.forEach((element, index) => {
+    this.state.box.forEach(element => {
       if (element.id === data.id) {
-        element.click ? alertFun() : updateClick(element, index);
+        element.click ? this.alertFun() : this.updateClick(element);
       }
       // return element;
     });
