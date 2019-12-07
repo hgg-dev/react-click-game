@@ -12,7 +12,7 @@ class Card extends React.Component {
   };
 
   render() {
-    console.log("this.props.container" + this.props.container);
+    console.log("this.props.container", this.props.container);
     return this.props.container.map((el, index) => (
       <div
         style={this.cardColor(index)}

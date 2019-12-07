@@ -1,7 +1,3 @@
-// Fix recorder
-// Line 61, 62 need fix
-//why can't pass to header this.props.countSoFar
-
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
@@ -58,10 +54,14 @@ class App extends React.Component {
     var idUpdate = data.id;
     console.log(idUpdate);
 
-    const newBox = (this.state.box[idUpdate].click = true);
-
+    //1. Create a copy using spread operator [] for array, {} for Object
+    //2. Assign new value
+    //3. Update state with setState
+    const newBox = [...this.state.box]; //{} for object,
+    newBox[idUpdate].click = true;
+    console.log(newBox);
     this.setState({
-      countState: ++this.state.countState,
+      countState: this.state.countState + 1,
       box: newBox
     });
 
