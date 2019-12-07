@@ -1,5 +1,6 @@
+//line 45 - put style in Parent Card to trigger state change
+
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Card from "./components/card";
 import Header from "./components/layout/header";
@@ -25,7 +26,7 @@ class App extends React.Component {
       {
         id: 3,
         src: "./img/4.PNG",
-        click: true
+        click: false
       },
       {
         id: 4,
@@ -39,80 +40,53 @@ class App extends React.Component {
       }
     ],
     countState: 0,
-    highestCount: 0
+    highestCount: 0,
+    sorted: false
   };
 
-  // randomOrder = el => {
-  //   console.log(cal);
-  //   console.log("count: " + count);
-  //   return {
-  //     flexWrap: count == 0 ? "flexWrap: wrap" : "flexWrap: wrapReverse"
-  //   };
-  // };
+  sortCard() {
+    var temp = this.state.sorted ? false : true;
+    console.log(temp);
+    this.setState({ sorted: temp });
+  }
+
+  sortCardStyle() {
+    return { flexWrap: this.state.sorted ? "wrap" : "reverseWrap" };
+  }
 
   updateClick(data) {
     var idUpdate = data.id;
-    console.log(idUpdate);
-
-    //1. Create a copy using spread operator [] for array, {} for Object
-    //2. Assign new value
-    //3. Update state with setState
-    const newBox = [...this.state.box]; //{} for object,
+    const newBox = [...this.state.box];
     newBox[idUpdate].click = true;
-    console.log(newBox);
     this.setState({
       countState: this.state.countState + 1,
       box: newBox
     });
-
-    // var updatedBox = box.map((element, indx) => {
-    //   return { ...element, click: indx == index ? true : false };
-    // });
-
-    // this.setState({ box: boxUpdate });
-    // console.log("id: " + data.id + " key: " + index);
-    // console.log("click update to" + this.state.box[index].click);
   }
 
   alertFun = data => {
     alert("clicked already");
-
-    // if (this.state.highestCount < this.state.countState) {
-    //   console.log("the count is " + this.state.count);
-    //   this.setState({ highestCount: this.state.countState });
-    //   this.state.count = 0;
-    //   console.log("highest count is " + this.state.highestCount);
-    // }
   };
 
   //Trigger by click on card
   clicked = data => {
+    this.sortCard();
+    console.log(data);
     this.state.box.forEach(element => {
       if (element.id === data.id) {
         element.click ? this.alertFun() : this.updateClick(element);
       }
-      // return element;
     });
-
-    // this.setState({
-    //   countState: this.state.countState + 1,
-    //   box: this.state.box.map(element => {
-    //     if (element.id === data.id) {
-    //       element.click ? alert("clicked already") : (element.click = true);
-    //     }
-    //     return element;
-    //   })
-    // });
   };
 
   render() {
     return (
       <>
-        <Header countSoFar={this.state.countState} />
-        <div className="parentcard">
-          <h2>Current Count: {this.state.countState}</h2>
-          <h2>Highest Count: </h2>
-          <Card container={this.state.box} clicked={this.clicked} />
+        <Header countSoFar={this.state} />
+        <div className="background">
+          <div className="parentcard" style={this.sortCardStyle()}>
+            <Card container={this.state.box} clicked={this.clicked} />
+          </div>
         </div>
       </>
     );

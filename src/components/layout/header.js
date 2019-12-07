@@ -1,7 +1,7 @@
 import React from "react";
 
 function Header(props) {
-  // console.log(this.props.countSoFar);
+  console.log(props.countSoFar);
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -12,7 +12,7 @@ function Header(props) {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link">Count:</a>
+              <a className="nav-link">Count: {props.countSoFar.countState}</a>
             </li>
             <li className="nav-item">
               <a className="nav-link">Highest Count:</a>

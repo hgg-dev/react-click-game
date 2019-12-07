@@ -32,8 +32,6 @@ Card.protoTypes = {
   container: PropTypes.array.isRequired
 };
 
-const cardFunction = {};
-
 export default Card;
 
 // PropTry = props => {

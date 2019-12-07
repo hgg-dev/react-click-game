@@ -1,4 +1,4 @@
-.parentcard {
+.background {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -6,6 +6,15 @@
   background-color: silver;
   height: 100vh;
 }
+
+.parentcard {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  max-width: 500px;
+}
+
 h1 {
   width: 100%;
   text-align: center;
