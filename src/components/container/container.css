@@ -1,0 +1,7 @@
+.parentcard {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  max-width: 500px;
+}

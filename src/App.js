@@ -4,6 +4,7 @@ import React from "react";
 import "./App.css";
 import Card from "./components/card";
 import Header from "./components/layout/header";
+import Container from "./components/container";
 
 class App extends React.Component {
   state = {
@@ -45,13 +46,8 @@ class App extends React.Component {
   };
 
   sortCard() {
-    var temp = this.state.sorted ? false : true;
-    console.log(temp);
-    this.setState({ sorted: temp });
-  }
-
-  sortCardStyle() {
-    return { flexWrap: this.state.sorted ? "wrap" : "reverseWrap" };
+    this.setState({ sorted: !this.state.sorted });
+    console.log(this.state.sorted);
   }
 
   updateClick(data) {
@@ -84,10 +80,12 @@ class App extends React.Component {
       <>
         <Header countSoFar={this.state} />
         <div className="background">
-          <div className="parentcard" style={this.sortCardStyle()}>
-            <Card container={this.state.box} clicked={this.clicked} />
-          </div>
+          {/* <div className="parentcard" style={this.sortCardStyle()}> */}
+          <Container Styling={this.state.sorted}>
+            {<Card container={this.state.box} clicked={this.clicked} />}
+          </Container>
         </div>
+        {/* </div> */}
       </>
     );
   }
