@@ -81,7 +81,7 @@ class App extends React.Component {
         <Header countSoFar={this.state} />
         <div className="background">
           {/* <div className="parentcard" style={this.sortCardStyle()}> */}
-          <Container Styling={this.state.sorted}>
+          <Container styling={this.state.sorted}>
             {<Card container={this.state.box} clicked={this.clicked} />}
           </Container>
         </div>
