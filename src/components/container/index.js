@@ -10,7 +10,7 @@ class Container extends React.Component {
     return (
       <div
         className="parentcard"
-        style={{ flexWrap: this.props.Styling ? "wrap" : "wrap-reverse" }}
+        style={{ flexWrap: this.props.styling ? "wrap" : "wrap-reverse" }}
       >
         {this.props.children}
       </div>
